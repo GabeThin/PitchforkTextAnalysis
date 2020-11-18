@@ -129,12 +129,18 @@ def scores_graph(x,y): # graph of score frequencies
     plt.bar(x, y, align = 'edge', width = 0.1, edgecolor = 'black', color='cyan')
     x_ticks = np.array([0, 2.5, 5.0, 7.5, 10.0])
     plt.xlim(0, 10.1)
+    plt.title("Frequencies of Scores, 0-10")
+    plt.xlabel("Score")
+    plt.ylabel("Score Frequency")
     plt.xticks(x_ticks, x_ticks)
     plt.tight_layout()
     plt.show()
 
 def freqs_graph(x,y): # graph of word frequencies
     plt.bar(x, y, align = 'edge', width = 0.5, edgecolor = 'black', color='purple')
+    plt.title("Frequencies of Words")
+    plt.xlabel("Word")
+    plt.ylabel("Word Frequency")
     plt.tight_layout()
     plt.show()
 
@@ -157,6 +163,9 @@ def find_review_length(reviews): # find word length of each review
 
 def scores_v_review_length_graph(x, y): # scores vs. word length graph
     plt.scatter(x, y, s=1, c='red')
+    plt.title("Score vs. Review Length")
+    plt.xlabel("Score")
+    plt.ylabel("Review Length")
     plt.tight_layout()
     plt.xlim(0, 10.1)
     plt.show()
@@ -180,10 +189,10 @@ def main(): # I have commented out each graph so you can switch between graphs
     # x, y = get_freqs_data(individual_freqs_list, 1, 15) # word frequencies for one review graph
     # freqs_graph(x, y)
 
-    x, y = get_scores(select_scores(conn, True), 300) # score frequencies graph
-    scores_graph(x, y)
+    # x, y = get_scores(select_scores(conn, True), 300) # score frequencies graph
+    # scores_graph(x, y)
 
-    # x = select_scores(conn, False) # scores vs. review length graph
-    # y = find_review_length(cleaned)
-    # scores_v_review_length_graph(x, y)
+    x = select_scores(conn, False) # scores vs. review length graph
+    y = find_review_length(cleaned)
+    scores_v_review_length_graph(x, y)
 main()
