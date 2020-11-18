@@ -183,14 +183,14 @@ def main(): # I have commented out each graph so you can switch between graphs
 
     individual_freqs_list = get_freqs(cleaned) # get word frequencies for one review
 
-    x, y = get_all_freqs_data(all_freqs, 30) # all word frequencies graph
-    freqs_graph(x, y)
+    # x, y = get_all_freqs_data(all_freqs, 30) # all word frequencies graph
+    # freqs_graph(x, y)
 
     # x, y = get_freqs_data(individual_freqs_list, 1, 15) # word frequencies for one review graph (you can choose which review to graph)
     # freqs_graph(x, y)
 
-    # x, y = get_scores(select_scores(conn, True), 300) # score frequencies graph
-    # scores_graph(x, y)
+    x, y = get_scores(select_scores(conn, True, 500), 500) # score frequencies graph
+    scores_graph(x, y)
 
     # x = select_scores(conn, False, 500) # scores vs. review length graph
     # y = find_review_length(cleaned)
