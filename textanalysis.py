@@ -18,7 +18,7 @@ def create_connection(db_file): # creates connection with database
 
     return conn
 
-def select_scores(conn, ordered): # selects the scores of all the reviews from the database
+def select_scores(conn, ordered, number): # selects the scores of all the reviews from the database
     scores = []
     conn.row_factory = lambda cursor, row: row[0]
     cur = conn.cursor()
@@ -28,7 +28,7 @@ def select_scores(conn, ordered): # selects the scores of all the reviews from t
     if ordered == True:
         return sorted(scores)
     else:
-        return scores[:300] # only the first 300 reviews so program runs faster
+        return scores[:number] # only the first 300 reviews so program runs faster
 
 def get_scores(scores, number): # get score frequencies
     freqs = {}
@@ -175,7 +175,7 @@ def main(): # I have commented out each graph so you can switch between graphs
     database = "database.sqlite"
     conn = create_connection(database) # establish connection
 
-    cleaned = clean_text(select_corpus(conn), 300) # clean first 300 reviews
+    cleaned = clean_text(select_corpus(conn), 500) # clean first 300 reviews
 
     all_words = get_all_words(cleaned) # get all words from all reviews
 
@@ -183,16 +183,16 @@ def main(): # I have commented out each graph so you can switch between graphs
 
     individual_freqs_list = get_freqs(cleaned) # get word frequencies for one review
 
-    # x, y = get_all_freqs_data(all_freqs, 30) # all word frequencies graph
-    # freqs_graph(x, y)
+    x, y = get_all_freqs_data(all_freqs, 30) # all word frequencies graph
+    freqs_graph(x, y)
 
-    # x, y = get_freqs_data(individual_freqs_list, 1, 15) # word frequencies for one review graph
+    # x, y = get_freqs_data(individual_freqs_list, 1, 15) # word frequencies for one review graph (you can choose which review to graph)
     # freqs_graph(x, y)
 
     # x, y = get_scores(select_scores(conn, True), 300) # score frequencies graph
     # scores_graph(x, y)
 
-    x = select_scores(conn, False) # scores vs. review length graph
-    y = find_review_length(cleaned)
-    scores_v_review_length_graph(x, y)
+    # x = select_scores(conn, False, 500) # scores vs. review length graph
+    # y = find_review_length(cleaned)
+    # scores_v_review_length_graph(x, y)
 main()
