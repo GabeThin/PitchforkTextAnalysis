@@ -165,7 +165,7 @@ def scores_v_review_length_graph(x, y): # scores vs. word length graph
     plt.scatter(x, y, s=1, c='red')
     plt.title("Score vs. Review Length")
     plt.xlabel("Score")
-    plt.ylabel("Review Length")
+    plt.ylabel("Review Length (# of Words)")
     plt.tight_layout()
     plt.xlim(0, 10.1)
     plt.show()
